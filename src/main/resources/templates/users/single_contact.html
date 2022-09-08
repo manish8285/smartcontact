@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="users/base::Layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+		<div class="card mx-2" th:if="${contact}" >
+			<div class="container text-center">
+				<img class="postcard_profile_image mt-2" th:src="@{'/img/'+${(contact.profile!=null)? contact.profile : 'defaultContact.png'}}" alt="contact profile" />
+				<div class="text-center">
+					<h1  ><span th:text="${contact.name}"> </span>	
+					<span style="color:yellow" th:text="${contact.nickName}"></span>
+				</h1>
+				
+			</div>
+			
+				<table class="table">
+				  <thead>
+				    <tr>
+				      Details
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">Phone</th>
+				      <td th:text="${contact.number}"></td>
+				    </tr>
+					<tr>
+				      <th scope="row">Email</th>
+				      <td th:text="${contact.email}"></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Work</th>
+				      <td th:text="${contact.work}"></td>
+				    </tr>
+				  </tbody>
+				</table>
+			<button class="btn btn-block bg-primary mb-3">Edit</button>
+			
+		</div>
+		</div>
+		<div th:unless="${contact}">
+			<div class="alert alert-warning mx-2">No record found ...</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="users/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+	<section>
+		<div class="card mx-2">
+			<div class="card-body">
+				<div class="container text-center">
+					
+					<h1>Your Contacts</h1>
+					<form action="">
+						<div class="form-group col-md-4">
+						      <select onchange="viewRowNumber(this)" id="inputState" class="form-control">
+						      <option selected disabled>--Select No of rows to show--</option>
+						       <option value="2">2 No of rows</option>
+						        <option value="5">5 No of rows</option>
+						        <option value="10">10 No of rows</option>
+						    	<option value="15">15 No of rows</option>
+						    	<option value="20">20 No of rows</option>
+						      </select>
+					    </div>
+					</form>
+					
+				<!-- 	search function search block -->
+					
+				</div>
+				<div class="form search-container">
+					<input onkeyup="search_contact()" type="text" id="contact_search_input" class="form-control" placeholder="search contact" />
+					<div class="search-result"></div>
+				</div>
+				
+				
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							    <tr>
+							      <th scope="col">#Id</th>
+							      <th scope="col">Name</th>
+							      <th scope="col">Phone</th>
+							      <th scope="col">Email</th>
+							      <th scope="col">Action</th>
+							    </tr>
+						</thead>
+							  <tbody>
+							    <tr th:each="c : ${contacts}">
+							      <th scope="row" th:text="${'SCM'+ c.id}"></th>
+							      
+							      <td >
+							      	<a th:href="@{'/user/single_contact/'+${c.id}}">
+							      		<img src="" class="thumbnail_profile_image" th:src="@{'/img/'+${ (c.profile != null) ? c.profile : 'defaultContact.png' }}" alt="profile image" />
+							      		<span th:text="${c.name}"></span>
+							      	</a>
+							      </td>
+							      
+							      <td th:text="${c.number}"></td>
+							      <td th:text="${c.email}"></td>
+							      
+							      <td class="d-flex">
+							      <!--for delete contact  -->
+							      	<a href="" th:href="@{'/user/contact/delete/'+${c.id}}"><i class="fa-solid fa-trash-can"></i> </a>
+							      	
+							      	<!-- for edit contact -->
+							      	<form th:action="@{'/user/contact/update/'+${c.id}}" method="post">
+							      	<button class="icon_button" type="submit" ><i class="fa-solid fa-pen-nib"></i> </button>
+							      	</form>
+							      	<a href="" th:href="@{'/user/single_contact/'+${c.id}}"><i class="fa-solid fa-eye"></i></a>
+							      </td>
+							    </tr>
+							   
+							  </tbody>
+					
+					
+					
+					</table>
+				</div>
+				<!-- paggination -->
+				
+					<nav aria-label="Page navigation example" th:if="${contacts != null}" >
+					  <ul class="pagination">
+					    <li class="page-item" th:if="${page != 0 && totalPages > 0}" ><a class="page-link" th:href="@{'/user/view_contacts/'+${page-1}}" href="#">Previous</a></li>
+					    <li th:each="i : ${#numbers.sequence(1,totalPages)}" th:classappend="${(page==i-1) ? 'active' : ''}" class="page-item"><a class="page-link" th:href="@{'/user/view_contacts/'+${i-1}}" href="#" th:text="${i}" >1</a></li>
+
+					    <li th:if="${totalPages>page+1}" class="page-item"  ><a class="page-link" th:href="@{'/user/view_contacts/'+${page+1}}" href="#">Next</a></li>
+					  </ul>
+					</nav>
+
+			</div>
+		</div>
+	</section>
+</body>
+</html>

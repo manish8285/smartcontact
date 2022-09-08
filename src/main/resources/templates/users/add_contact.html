@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="users/base::Layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+		<div class="card m-2">
+			<div class="container">
+				<div class="card-body">
+				<div class="container text-center"><h1><i class="fa-solid fa-pen"></i> Add Contact</h1></div>
+				<form 
+				novalidate 
+				method="post"
+				th:action="@{process_add_contact}"  
+				enctype="multipart/form-data" 
+				th:object="${contact}">
+				
+				
+					<div class="input-group mt-3">
+						<div class="input-group-text"><i class="fa-solid fa-user-large"></i></div>
+						<input type="text"
+						name="name"
+						 class="form-control"
+						  placeholder="Enter Name" />
+					
+					</div>
+				
+				<!-- for contact number  -->
+				<div class="input-group mt-3">
+						<div class="input-group-text"><i class="fa-solid fa-phone"></i></div>
+						<input 
+						name="number"
+						type="number" 
+						class="form-control" 
+						placeholder="Contact Number" />
+					
+					</div>
+					
+				<!-- for work  -->
+				<div class="input-group mt-3">
+						<div class="input-group-text"><i class="fa-solid fa-briefcase"></i></div>
+						<input 
+						name="work"
+						type="text" 
+						class="form-control" 
+						placeholder="Work" />
+					
+					</div>
+				<!-- for nick name  -->
+				<div class="input-group mt-3">
+						<div class="input-group-text"><i class="fa-solid fa-face-smile-wink"></i></div>
+						<input 
+						name="nickName"
+						type="text" 
+						class="form-control" 
+						placeholder="Nick Name" />
+					
+					</div>
+					
+					<!-- for email  -->
+				<div class="input-group mt-3">
+						<div class="input-group-text">@</div>
+						<input 
+						name="email"
+						type="email" 
+						class="form-control" 
+						placeholder="Email" />
+					
+					</div>
+					
+						<!-- for profile image  -->
+				<div class="input-group mt-3">
+						<div class="input-group-text"><i class="fa-solid fa-image"></i></div>
+						<input 
+						name="profileImage"
+						type="file" 
+						class="form-control" />
+					
+					</div>
+					
+					<div class="container text-center mt-3">
+						<button type="submit" class="btn btn-outline-success">Save Contact</button>
+					</div>
+				
+				</form>
+				
+				
+				
+			</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
